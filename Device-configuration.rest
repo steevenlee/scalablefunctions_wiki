@@ -1,0 +1,47 @@
+Scalable functions are disabled by default in the device. User must enable them when they want to use it.
+
+Scalable functions have very little device configuration.
+It includes enabling total number of scalable functions and PCI BAR size.
+
+Scalable function configuration is done using `mlxconfig <https://docs.mellanox.com/pages/viewpage.action?pageId=19811008>`_
+tool.
+
+Quick example
+--------------
+To configure 236 SFs per PCI device with BAR size of 1MBytes::
+
+$ mlxconfig -d 0000:03:00.0 s PF_BAR2_ENABLE=0 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10
+
+Description
+-----------
+1. Total/maximum number of scalable functions per PCI PF
+This is controlled using PF_TOTAL_SF.
+
+2. PCI BAR size per scalable function
+This is controlled using PF_SF_BAR_SIZE.
+
+Device Support matrix and config
+---------------------------------
+.. list-table:: Device support matrix
+   :widths: 15 20 20 20 20
+
+   * - Device
+     - Minimum firmware version
+     - Maximum scalable Functions
+     - Maximum Virtual Functions
+     - Config (mlxconfig)
+   * - ``ConnectX-5, ConnectX-6``
+     - 16.29.1040
+     - 236
+     - 16
+     - PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10 SRIOV_EN=1 NUM_OF_VFS=16
+   * - ``ConnectX-6-DX``
+     -  16.29.1040
+     - 236
+     - 16
+     - PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10 SRIOV_EN=1 NUM_OF_VFS=16
+   * - ``ConnectX-6-DX``
+     -  16.29.1040
+     - 253
+     - 0
+     - PF_TOTAL_SF=253 PF_SF_BAR_SIZE=10 SRIOV_EN=0
