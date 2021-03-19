@@ -1,0 +1,30 @@
+Introduction
+-------------
+
+Scalable function is a lightweight function that has a parent PCI function on
+which it is deployed. mlx5 scalable function has its own function capabilities
+and its own resources. This means a scalable function has its own dedicated
+queues(txq, rxq, cq, eq). These queues are neither shared nor stolen from
+the parent PCI function.
+
+When scalable function is RDMA capable, it has its own QP1, GID table and rdma
+resources neither shared nor stolen from the parent PCI function.
+
+A scalable function has dedicated window in PCI BAR space that is not shared
+with the other scalable functions or parent PCI function. This ensures that all
+class devices of the scalable function accesses only assigned PCI BAR space.
+
+A scalable function supports eswitch representation through which it supports tc
+offloads. User must configure eswitch to send/receive packets from/to
+scalable function port.
+
+Scalable functions share PCI level resources such as PCI MSI-X IRQs with
+their other scalable function and/or with its parent PCI function.
+
+mlx5 scalable function is implemented using Linux kernel [subfunction][1].
+
+For more information about subfunction refer to the kernel's [subfunction documentation][1]
+and [mlx5 subfunction documentation][2].
+
+[1]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/networking/devlink/devlink-port.rst?h=v5.12-rc3#n125
+[2]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/networking/device_drivers/ethernet/mellanox/mlx5.rst?h=v5.12-rc3#n186
