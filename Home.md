@@ -38,6 +38,12 @@ their other scalable function and/or with its parent PCI function.
 For more information about subfunction refer to the kernel's [subfunction documentation][1]
 and [mlx5 subfunction documentation][2].
 
+Overall design approach discussed with wider community, developers, vendors at [netdev conference 0x14][4].
+
+This [video presentation][5] contains slides, discussion and Q&A.
+
 [1]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/networking/devlink/devlink-port.rst?h=v5.12-rc3#n125
 [2]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/networking/device_drivers/ethernet/mellanox/mlx5.rst?h=v5.12-rc3#n186
 [3]: https://github.com/Mellanox/scalablefunctions/wiki/Step-by-step-guide
+[4]: https://netdevconf.info/0x14/pub/slides/45/sf_mgmt_using_devlink_netdevconf_0x14.pdf
+[5]: https://www.youtube.com/watch?v=bwu5ED6QcoA
