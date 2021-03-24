@@ -13,7 +13,7 @@ Minimum firmware version needed is 16.29.1040. It can be downloaded from `firmwa
 Once firmware is updated, enable scalable function support in device.
 ::
 
-$ mlxconfig -d 0000:06:00.0 s PF_BAR2_ENABLE=1 PF_BAR2_SIZE=2
+$ mlxconfig -d 0000:06:00.0 s PF_BAR2_ENABLE=0 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10
 
 1.3 Cold reboot
 ===============
