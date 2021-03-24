@@ -10,7 +10,10 @@ Quick example
 --------------
 To configure 236 SFs per PCI device with BAR size of 1MBytes::
 
-$ mlxconfig -d 0000:03:00.0 s PF_BAR2_ENABLE=0 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10
+$ mlxconfig -d 0000:03:00.0 s PF_BAR2_ENABLE=0  PER_PF_NUM_SF=1 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10
+$ mlxconfig -d 0000:03:00.1 s PF_BAR2_ENABLE=0  PER_PF_NUM_SF=1 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10
+
+Note: Both the PCI functions should have symmetric configuration set.
 
 Description
 -----------
