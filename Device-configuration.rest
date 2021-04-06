@@ -33,23 +33,28 @@ Device Support matrix and config
      - Maximum scalable Functions
      - Maximum Virtual Functions
      - Config (mlxconfig)
-   * - ``ConnectX-5, ConnectX-6``
-     - 16.29.1040
+   * - ``ConnectX-5``
+     - 16.30.1004
+     - 236
+     - 16
+     - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10 SRIOV_EN=1 NUM_OF_VFS=16
+   * - ``ConnectX-6``
+     - 20.30.1004
      - 236
      - 16
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10 SRIOV_EN=1 NUM_OF_VFS=16
    * - ``ConnectX-6-DX``
-     -  16.29.1040
+     -  20.30.1004
      - 236
      - 16
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10 SRIOV_EN=1 NUM_OF_VFS=16
    * - ``ConnectX-6-DX``
-     -  16.29.1040
+     -  22.30.1004
      - 253
      - 0
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=253 PF_SF_BAR_SIZE=10 SRIOV_EN=0
    * - ``ConnectX-6-DX``
-     -  16.29.1040
+     -  22.30.1004
      - 0
      - 16
      - PF_TOTAL_SF=0 PER_PF_NUM_SF=1 SRIOV_EN=1 NUM_OF_VFS=16
