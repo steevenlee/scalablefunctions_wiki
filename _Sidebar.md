@@ -4,6 +4,10 @@
 * [[Supported Devices]]
 * [[Device configuration]]
 
-### Upstream software configuration
+### Upstream software guide
+* [[Kernel configuration]]
+* [[Step by step guide]]
+
+### MLNX_OFED software guide
 * [[Kernel configuration]]
 * [[Step by step guide]]
