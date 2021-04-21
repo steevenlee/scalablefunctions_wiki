@@ -5,5 +5,5 @@
 * [[Device configuration]]
 
 ### Upstream software guide
-* [[Kernel configuration]]
+* [[Upstream kernel configuration]]
 * [[Upstream step by step guide]]
