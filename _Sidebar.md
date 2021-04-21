@@ -1,9 +1,9 @@
-# Quick links
+## Quick links
 
-## Device setup
+### Device setup
 * [[Supported Devices]]
 * [[Device configuration]]
 
-## Upstream software configuration
+### Upstream software configuration
 * [[Kernel configuration]]
 * [[Step by step guide]]
