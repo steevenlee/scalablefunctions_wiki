@@ -42,6 +42,6 @@ Overall design approach discussed with wider community, developers, vendors at [
 
 [1]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/networking/devlink/devlink-port.rst?h=v5.12-rc3#n125
 [2]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/networking/device_drivers/ethernet/mellanox/mlx5.rst?h=v5.12-rc3#n186
-[3]: https://github.com/Mellanox/scalablefunctions/wiki/Step-by-step-guide
+[3]: https://github.com/Mellanox/scalablefunctions/wiki/Upstream-step-by-step-guide
 [4]: https://netdevconf.info/0x14/pub/slides/45/sf_mgmt_using_devlink_netdevconf_0x14.pdf
 [5]: https://www.youtube.com/watch?v=bwu5ED6QcoA
