@@ -99,7 +99,18 @@ Or
 
   $ devlink port function set pci/0000:06:00.0/32768 hw_addr 00:00:00:00:88:88
 
-3.6  Now activate the SF
+3.6 Configure OVS
+=======================================================
+::
+
+  $ systemctl start openvswitch
+  $ ovs-vsctl add-br network1
+  $ ovs-vsctl add-port network1 ens2f0npf0sf88
+  $ ip link set dev ens2f0npf0sf88 up
+  $ ovs-vsctl add-port network1 ens2f0np0
+  $ ip link set dev ens2f0np0 up
+
+3.7  Now activate the SF
 =========================
 Activating the SF results in creating an auxiliary device and initiating driver load sequence for netdevice, rdma and vdpa devices.
 
@@ -113,7 +124,7 @@ In future, an explicit option will be added to deterministically add the netdev 
 
 $ devlink port function set pci/0000:06:00.0/32768 state active
 
-3.7 View the new state of the SF
+3.8 View the new state of the SF
 ================================
 ::
 
@@ -137,21 +148,21 @@ $ devlink port function set pci/0000:06:00.0/32768 state active
       }
     }
 
-3.8  View the auxiliary device of the SF
+3.9  View the auxiliary device of the SF
 =========================================
 ::
 
   $ devlink dev show
   devlink dev show auxiliary/mlx5_core.sf.4
 
-3.9 View the port and netdevice associated with the SF
+3.10 View the port and netdevice associated with the SF
 =======================================================
 ::
 
   $ devlink port show auxiliary/mlx5_core.sf.4/1
   auxiliary/mlx5_core.sf.4/1: type eth netdev p0sf88 flavour virtual port 0 splittable false
 
-3.10 Deactivate SF
+3.11 Deactivate SF
 ==================
 Once SF usage is complete, deactivate the SF. This will trigger driver unload in the host system.
 Once SF is deactivated, its operational state will change to be "detached".
@@ -162,7 +173,7 @@ This ensures a graceful hot unplug.
 
   $ devlink port function set pci/0000:06:00.0/32768 state inactive
 
-3.11 Delete SF
+3.12 Delete SF
 ==============
 Finally once the state is "inactive" and operational state is "detached", user can safely delete the SF.
 For faster provisioning, a user can reconfigure and active the SF again without deletion.
