@@ -1,0 +1,1 @@
+Kernel 4.18 and higher are supported.
