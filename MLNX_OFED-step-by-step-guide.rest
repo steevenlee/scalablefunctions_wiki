@@ -1,12 +1,12 @@
 1. Device configuration
 -----------------------
-This is a step by step guide for ConnectX-6DX. For other devices firmware version or maximum limit may vary.
+This is a step by step guide for ConnectX-5. For other devices firmware version or maximum limit may vary.
 Please check respective sections for it.
 
 1.1 Update firmware
 ===================
 Update firmware that has support for scalable functions
-Minimum firmware version needed is 20.30.1004 It can be downloaded from `firmware downloads <https://www.mellanox.com/support/firmware/firmware-downloads>`_.
+Minimum firmware version needed is 16.30.1004 It can be downloaded from `firmware downloads <https://www.mellanox.com/support/firmware/firmware-downloads>`_.
 
 1.2 Enable support
 ==================
