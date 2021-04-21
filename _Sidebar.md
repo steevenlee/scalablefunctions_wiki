@@ -1,5 +1,5 @@
 **Quick links**
 * [[Supported Devices]]
 * [[Device configuration]]
-* [[Upstream kernel configuration]]
+* [[Kernel configuration]]
 * [[Step by step guide]]
