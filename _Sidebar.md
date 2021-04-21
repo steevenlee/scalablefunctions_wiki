@@ -6,4 +6,4 @@
 
 ### Upstream software guide
 * [[Kernel configuration]]
-* [[Step by step guide]]
+* [[Upstream step by step guide]]
