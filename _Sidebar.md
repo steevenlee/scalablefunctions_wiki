@@ -2,4 +2,4 @@
 * [[Supported Devices]]
 * [[Device configuration]]
 * [[Kernel configuration]]
-* [[Step by step guide upstream]]
+* [[Step by step guide]]
