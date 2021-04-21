@@ -1,0 +1,157 @@
+1. Device configuration
+-----------------------
+This is a step by step guide for ConnectX-6DX. For other devices firmware version or maximum limit may vary.
+Please check respective sections for it.
+
+1.1 Update firmware
+===================
+Update firmware that has support for scalable functions
+Minimum firmware version needed is 20.30.1004 It can be downloaded from `firmware downloads <https://www.mellanox.com/support/firmware/firmware-downloads>`_.
+
+1.2 Enable support
+==================
+Once firmware is updated, enable scalable function support in device.
+::
+
+$ mlxconfig -d 0000:06:00.0 s PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10
+
+1.3 Cold reboot
+===============
+Perform cold system reboot for configuration to take effect.
+
+2. Software control and commands
+----------------------------------
+Scalable functions uses 4 step process from create to use as shown below.
+
+.. image:: pictures/create-config-deploy-use.png
+   :scale: 60 %
+
+
+2.1 Move PCI PF to switchdev mode
+=================================
+::
+
+  $ devlink dev eswitch set pci/0000:06:00.0 mode switchdev
+  $ devlink dev eswitch show pci/0000:06:00.0
+
+2.2 Show the physical (aka uplink) port of the PF
+==================================================
+::
+
+  $ devlink port show
+  pci/0000:06:00.0/65535: type eth netdev ens2f0np0 flavour physical port 0 splittable false
+
+2.3 Add one SF
+==============
+SF after addition is still not usable for the end user application. It can be usable after configuration and activation.
+
+::
+
+  $ mlxdevm port add pci/0000:06:00.0 flavour pcisf pfnum 0 sfnum 88
+  pci/0000:06:00.0/32768: type eth netdev eth6 flavour pcisf controller 0 pfnum 0 sfnum 88
+    function:
+      hw_addr 00:00:00:00:00:00 state inactive opstate detached
+
+2.4 Show the newly added devlink port
+=====================================
+Show the SF by port index or by its representor device
+::
+
+  $ mlxdevm port show ens2f0npf0sf88
+
+Or
+
+::
+
+  $ mlxdevm port show pci/0000:06:00.0/32768
+  pci/0000:06:00.0/32768: type eth netdev eth6 flavour pcisf controller 0 pfnum 0 sfnum 88
+    function:
+      hw_addr 00:00:00:00:00:00 state inactive opstate detached
+
+2.5 Set the mac address of the SF
+=================================
+::
+
+  $ mlxdevm port function set pci/0000:06:00.0/32768 hw_addr 00:00:00:00:88:88
+
+2.6 Configure OVS
+=======================================================
+::
+
+  $ systemctl start openvswitch
+  $ ovs-vsctl add-br network1
+  $ ovs-vsctl add-port network1 ens2f0npf0sf88
+  $ ip link set dev ens2f0npf0sf88 up
+  $ ovs-vsctl add-port network1 ens2f0np0
+  $ ip link set dev ens2f0np0 up
+
+2.7  Now activate the SF
+=========================
+Activating the SF results in creating an auxiliary device and initiating driver load sequence for netdevice, rdma and vdpa devices.
+
+Once the operational state is marked as attached, driver is attached to this SF and device loading starts.
+
+An application interested in using the SF netdevice and rdma device needs to monitor the rdma and netdevices either through udev monitor or poll the sysfs hierarchy of SF's auxiliary device.
+
+In future, an explicit option will be added to deterministically add the netdev and rdma device of SF.
+
+::
+
+$ mlxdevm port function set pci/0000:06:00.0/32768 state active
+
+2.8 View the new state of the SF
+================================
+::
+
+  $ mlxdevm port show ens2f0npf0sf88 -jp
+  {
+     "port": {
+        "pci/0000:06:00.0/32768": {
+           "type": "eth",
+           "netdev": "ens2f0npf0sf88",
+           "flavour": "pcisf",
+           "controller": 0,
+           "pfnum": 0,
+           "sfnum": 88,
+           "function": {
+             "hw_addr": "00:00:00:00:88:88",
+             "state": "active",
+             "opstate": "attached"
+            }
+         }
+      }
+    }
+
+2.9  View the auxiliary device of the SF
+=========================================
+::
+
+  $ devlink dev show
+  devlink dev show auxiliary/mlx5_core.sf.4
+
+2.10 View the port and netdevice associated with the SF
+=======================================================
+::
+
+  $ devlink port show auxiliary/mlx5_core.sf.4/1
+  auxiliary/mlx5_core.sf.4/1: type eth netdev p0sf88 flavour virtual port 0
+
+2.11 Deactivate SF
+==================
+Once SF usage is complete, deactivate the SF. This will trigger driver unload in the host system.
+Once SF is deactivated, its operational state will change to be "detached".
+An orchestration system should poll for operational state to be changed to "detached" before deleting the SF.
+This ensures a graceful hot unplug.
+
+::
+
+  $ mlxdevm port function set pci/0000:06:00.0/32768 state inactive
+
+2.12 Delete SF
+==============
+Finally once the state is "inactive" and operational state is "detached", user can safely delete the SF.
+For faster provisioning, a user can reconfigure and active the SF again without deletion.
+
+::
+
+  $ mlxdevm port del pci/0000:06:00.0/32768
