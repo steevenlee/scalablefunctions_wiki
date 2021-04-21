@@ -15,7 +15,7 @@ Scalable functions do not require enabling PCI SR-IOV.
 
 mlx5 scalable function is implemented using Linux kernel [subfunction][1].
 
-Refer to [step by step guide][3] on how to use them.
+Refer to [step by step guide][3] on how to use them with upstream Linux kernel.
 
 Internals
 ---------
