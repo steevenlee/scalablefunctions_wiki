@@ -6,7 +6,7 @@ Please check respective sections for it.
 1.1 Update firmware
 ===================
 Update firmware that has support for scalable functions
-Minimum firmware version needed is 16.29.1040. It can be downloaded from `firmware downloads <https://www.mellanox.com/support/firmware/firmware-downloads>`_.
+Minimum firmware version needed is 20.30.1004 It can be downloaded from `firmware downloads <https://www.mellanox.com/support/firmware/firmware-downloads>`_.
 
 1.2 Enable support
 ==================
