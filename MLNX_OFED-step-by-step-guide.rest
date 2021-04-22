@@ -74,8 +74,8 @@ Or
 
   $ mlxdevm port function set pci/0000:06:00.0/32768 hw_addr 00:00:00:00:88:88
 
-2.6 Configure OVS
-=======================================================
+2.6 Configure OVS (openvswitch)
+===============================
 ::
 
   $ systemctl start openvswitch
