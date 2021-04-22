@@ -136,6 +136,15 @@ $ mlxdevm port function set pci/0000:06:00.0/32768 state active
   $ devlink port show auxiliary/mlx5_core.sf.4/1
   auxiliary/mlx5_core.sf.4/1: type eth netdev p0sf88 flavour virtual port 0
 
+Netdevice and RDMA device can be seen using iproute2 tools.
+
+::
+
+  $ ip link show
+  $ rdma link show
+
+At this stage orchestration software or user should assign IP address and use it for application.
+
 2.11 Deactivate SF
 ==================
 Once SF usage is complete, deactivate the SF. This will trigger driver unload in the host system.
