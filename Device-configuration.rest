@@ -28,7 +28,7 @@ This is controlled using PF_SF_BAR_SIZE.
 When using DPU Bluefield-2, DPU software hotplug and unplug a scalable function in the external (a.k.a bare metal) host system.
 To use scalable functions in the external host system which managed by DPU software, user must perform SF configuration in the external bare-metal host PF where containers use the SF.
 
-Device Support matrix and config
+DPU device Support matrix and config
 ---------------------------------
 .. list-table:: Device support matrix
    :widths: 10 10 15 15 8 20 20
@@ -54,38 +54,39 @@ Device Support matrix and config
      - 0
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=500 PF_SF_BAR_SIZE=10 SRIOV_EN=0
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=0 SRIOV_EN=0 NUM_OF_VFS=0
+
+Device Support matrix and config
+---------------------------------
+.. list-table:: Device support matrix
+   :widths: 10 15 15 8 20
+
+   * - Device
+     - Minimum firmware version
+     - Maximum scalable functions (on eswitch PF)
+     - Maximum virtual functions
+     - Config (mlxconfig) on eswitch PF
    * - ConnectX-6-DX
      -  20.30.1004
      - 236
-     - not applicable
      - 16
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10 SRIOV_EN=1 NUM_OF_VFS=16
-     - not applicable
    * - ConnectX-6-DX
      -  22.30.1004
      - 253
-     - not applicable
      - 0
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=253 PF_SF_BAR_SIZE=10 SRIOV_EN=0
-     - not applicable
    * - ConnectX-6-DX
      -  22.30.1004
      - 0
-     - not applicable
      - 16
      - PF_TOTAL_SF=0 PER_PF_NUM_SF=1 SRIOV_EN=1 NUM_OF_VFS=16
-     - not applicable
    * - ConnectX-6
      - 20.30.1004
      - 236
-     - not applicable
      - 16
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10 SRIOV_EN=1 NUM_OF_VFS=16
-     - not applicable
    * - ConnectX-5
      - 16.30.1004
      - 236
-     - not applicable
      - 16
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10 SRIOV_EN=1 NUM_OF_VFS=16
-     - not applicable
