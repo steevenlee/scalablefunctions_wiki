@@ -31,7 +31,7 @@ To use scalable functions in the external host system which managed by DPU softw
 Device Support matrix and config
 ---------------------------------
 .. list-table:: Device support matrix
-   :widths: 8 8 10 10 8 20 20
+   :widths: 8 10 10 10 8 20 20
 
    * - Device
      - Minimum firmware version
