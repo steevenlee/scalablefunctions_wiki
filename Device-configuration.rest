@@ -28,7 +28,7 @@ This is controlled using PF_SF_BAR_SIZE.
 When using DPU Bluefield-2, DPU software hotplug and unplug a scalable function in the external (a.k.a bare metal) host system.
 To use scalable functions in the external host system which managed by DPU software, user must perform SF configuration in the external bare-metal host PF where containers use the SF.
 
-DPU device Support matrix and config
+DPU device support matrix and config
 ---------------------------------
 .. list-table:: Device support matrix
    :widths: 10 10 15 15 8 20 20
@@ -41,21 +41,21 @@ DPU device Support matrix and config
      - Config (mlxconfig) on eswitch PF
      - Config (mlxconfig) on bare-metal host PF
    * - DPU Bluefield-2
-     -  24.30.1004
+     - 24.30.1004
      - 2
      - 500
      - 0
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=2 PF_SF_BAR_SIZE=10 SRIOV_EN=0
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=500 PF_SF_BAR_SIZE=10 SRIOV_EN=0 NUM_OF_VFS=0
    * - DPU Bluefield-2
-     -  24.30.1004
+     - 24.30.1004
      - 500
      - 0
      - 0
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=500 PF_SF_BAR_SIZE=10 SRIOV_EN=0
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=0 SRIOV_EN=0 NUM_OF_VFS=0
 
-Connect-X device Support matrix and config
+Connect-X device support matrix and config
 ---------------------------------
 .. list-table:: Device support matrix
    :widths: 10 15 15 8 20
@@ -66,7 +66,7 @@ Connect-X device Support matrix and config
      - Maximum virtual functions
      - Config (mlxconfig) on eswitch PF
    * - ConnectX-6-DX
-     -  20.30.1004
+     - 20.30.1004
      - 236
      - 16
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=236 PF_SF_BAR_SIZE=10 SRIOV_EN=1 NUM_OF_VFS=16
@@ -76,7 +76,7 @@ Connect-X device Support matrix and config
      - 0
      - PF_BAR2_ENABLE=0 PER_PF_NUM_SF=1 PF_TOTAL_SF=253 PF_SF_BAR_SIZE=10 SRIOV_EN=0
    * - ConnectX-6-DX
-     -  22.30.1004
+     - 22.30.1004
      - 0
      - 16
      - PF_TOTAL_SF=0 PER_PF_NUM_SF=1 SRIOV_EN=1 NUM_OF_VFS=16
