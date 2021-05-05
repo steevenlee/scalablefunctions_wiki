@@ -40,6 +40,18 @@ and [mlx5 subfunction documentation][2].
 
 Overall design approach discussed with wider community, developers, vendors at [netdev conference 0x14][4]. Its [presentation][5] contains slides, discussion and Q&A.
 
+
+SFs vs VFs
+-----------
+1. SFs are deployed in unit of one unlike SR-IOV VFs which are enabled all together.
+When a new container is spawned, at that point needed SF can be created and deployed.
+
+2. SFs do not have to implement full PCI config space, reset, registers.
+This makes the device light weight.
+
+3. SFs share MSI-X vectors with owner PCI PF and other peer SFs.
+This reduces the demand on total number of vectors in hardware and platform interrupt controller.
+
 [1]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/networking/devlink/devlink-port.rst?h=v5.12-rc3#n125
 [2]: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/networking/device_drivers/ethernet/mellanox/mlx5.rst?h=v5.12-rc3#n186
 [3]: https://github.com/Mellanox/scalablefunctions/wiki/Upstream-step-by-step-guide
