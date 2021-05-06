@@ -160,7 +160,7 @@ $ devlink port function set pci/0000:06:00.0/32768 state active
 ::
 
   $ devlink port show auxiliary/mlx5_core.sf.4/1
-  auxiliary/mlx5_core.sf.4/1: type eth netdev p0sf88 flavour virtual port 0 splittable false
+  auxiliary/mlx5_core.sf.4/1: type eth netdev enp60s0f0s88 flavour virtual port 0 splittable false
 
 3.11 Deactivate SF
 ==================
