@@ -1,0 +1,6 @@
+SFs life cycle is well supported with upstream compliant netlink go helper library.
+
+This can be useful for implementing SF device plugin or SF CNI.
+This library can support mlxdevm and upstream devlink upstream interface.
+
+User can find it at `mlxdevm library <https://github.com/Mellanox/mlxdevm-go.git>`_.
