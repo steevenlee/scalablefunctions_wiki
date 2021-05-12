@@ -41,7 +41,7 @@ DPU device support matrix and config
      - Config (mlxconfig) on eswitch PF
      - Config (mlxconfig) on bare-metal host PF
    * - DPU Bluefield-2
-     - 24.30.1004
+     - 24.31.0238
      - 2
      - 500
      - 0
