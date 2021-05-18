@@ -162,7 +162,14 @@ $ devlink port function set pci/0000:06:00.0/32768 state active
   $ devlink port show auxiliary/mlx5_core.sf.4/1
   auxiliary/mlx5_core.sf.4/1: type eth netdev enp60s0f0s88 flavour virtual port 0 splittable false
 
-3.11 Deactivate SF
+3.11 View the RDMA device for the SF
+====================================
+::
+
+  $ rdma dev show
+  $ ls /sys/bus/auxiliary/devices/mlx5_core.sf.4/infiniband/
+
+3.12 Deactivate SF
 ==================
 Once SF usage is complete, deactivate the SF. This will trigger driver unload in the host system.
 Once SF is deactivated, its operational state will change to be "detached".
@@ -173,7 +180,7 @@ This ensures a graceful hot unplug.
 
   $ devlink port function set pci/0000:06:00.0/32768 state inactive
 
-3.12 Delete SF
+3.13 Delete SF
 ==============
 Finally once the state is "inactive" and operational state is "detached", user can safely delete the SF.
 For faster provisioning, a user can reconfigure and active the SF again without deletion.
