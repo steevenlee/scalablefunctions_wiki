@@ -150,6 +150,22 @@ $ devlink port function set pci/0000:06:00.0/32768 state active
 
 3.9  View the auxiliary device of the SF
 =========================================
+There can be hundreds of auxiliary SF devices on the auxiliary bus.
+Each SF's auxiliary device contains a unique sfnum and PCI information.
+Each SF's sfnum can be read using:
+::
+
+  $ cat /sys/bus/auxiliary/devices/mlx5_core.sf.4/sfnum
+  88
+
+Now to see the parent PCI device of the SF
+::
+
+  $ readlink /sys/bus/auxiliary/devices/mlx5_core.sf.1
+  ../../../devices/pci0033:00/0033:00:00.0/0000:06:00.0/mlx5_core.sf.1
+
+View the devlink instance of the SF device:
+
 ::
 
   $ devlink dev show
