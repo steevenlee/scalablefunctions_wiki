@@ -1,0 +1,62 @@
+This section describes how to use RDMA and netdevice of SF auxiliary device which were configured in `step by step guide <https://github.com/Mellanox/scalablefunctions/wiki/Upstream-step-by-step-guide>`_.
+
+1. List and view SF and its protocol devices (RDMA, netdev)
+----------------------------------------------------------
+1.1  View the auxiliary device of the SF
+=========================================
+There can be hundreds of auxiliary SF devices on the auxiliary bus.
+Each SF's auxiliary device contains a unique sfnum and PCI information.
+
+Parent PCI BDF (Bus, Device, Function) and the SF number establishes a unique SF device.
+
+Each SF's sfnum can be read using:
+::
+
+  $ cat /sys/bus/auxiliary/devices/mlx5_core.sf.4/sfnum
+  88
+
+Now to see the parent PCI device of the SF
+::
+
+  $ readlink /sys/bus/auxiliary/devices/mlx5_core.sf.1
+  ../../../devices/pci0033:00/0033:00:00.0/0000:06:00.0/mlx5_core.sf.1
+
+View the devlink instance of the SF device:
+
+::
+
+  $ devlink dev show
+  devlink dev show auxiliary/mlx5_core.sf.4
+
+1.2 View the port and netdevice associated with the SF
+=======================================================
+::
+
+  $ devlink port show auxiliary/mlx5_core.sf.4/1
+  auxiliary/mlx5_core.sf.4/1: type eth netdev enp60s0f0s88 flavour virtual port 0 splittable false
+
+At this point netdevice of the SF can be assigned a DHCP or static IP address. 
+A system with NetworkManager enabled, will configure the netdevice by itself.
+
+If user prefers to assign this netdevice to a network namespace to use in a container, user can do
+
+::
+
+  $ ip netns add f00
+  $ ip link set dev enp60s0f0s88 netns foo
+
+1.3 View the RDMA device for the SF
+====================================
+::
+
+  $ rdma dev show
+  $ ls /sys/bus/auxiliary/devices/mlx5_core.sf.4/infiniband/
+    mlx5_4
+
+At this point user can run RDMA applications using verbs. 
+If user prefers to assign this RDMA device to a network namespace to use in a container, user can do
+
+::
+
+  $ ip netns add f00
+  $ rdma link set dev mlx5_4 netns foo
