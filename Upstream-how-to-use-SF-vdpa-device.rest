@@ -21,14 +21,12 @@ Each SF's sfnum can be read using:
 1.2 Load vdpa drivers
 ======================
 Load vdpa stack drivers if they are not loaded to map a VDPA device to a VM.
-
 ::
 
     $ modprobe vdpa
     $ modprobe vhost_vdpa
 
 Verify that vhost_vdpa driver is loaded.
-
 :: 
 
     $ ls -l  /sys/bus/vdpa/drivers
@@ -41,7 +39,6 @@ Each SF is management device. SF management device enables user to create corres
 A VDPA management device allows creating one or more types of VDPA devices such as net, block.
 
 View the management device of the SF device:
-
 ::
 
   $ vdpa mgmtdev show
@@ -52,18 +49,21 @@ View the management device of the SF device:
 1.4 Unload RDMA and netdevice of a SF
 ======================================
 In order to efficiently use the VDPA device of a SF, user should disable RDMA and netdevice of the SF.
+This is achieved by unload RDMA and netdevice driver of the SF.
+::
+
+    $ mlx5_core.rdma.4 > /sys/bus/auxiliary/devices/mlx5_core.sf.4/mlx5_core.rdma.4/driver/unbind
+    $ mlx5_core.eth.4 > /sys/bus/auxiliary/devices/mlx5_core.sf.4/mlx5_core.eth.4/driver/unbind
 
 1.5 Create the vdpa device that can be assigned via vhost
 ==========================================================
 VDPA device must be explicitly created by the user to use it.
-
 ::
 
   $ vdpa dev add name vdpa0 mgmtdev auxiliary/mlx5_core.sf.4
   $ vdpa dev show
 
 At this point VDPA device is created and located on vdpa bus.
-
 :: 
 
   $ ls /sys/bus/vdpa/devices/vdpa0
@@ -80,7 +80,6 @@ A VDPA device must be bound to vhost driver to assign a VDPA device to a VM.
 =================================================
 When a VDPA device is attached to the vhost-vdpa driver, a vhost-vdpa character device is created.
 This can be found at:
-
 ::
     $ ls /sys/bus/vdpa/devices/vdpa0/vhost-*
     vhost-vdpa-0
@@ -90,7 +89,6 @@ When starting a VM, /dev/vhost-vdpa-0 device should be assigned to the the VM as
 
 1.8 Assign VHOST VDPA device to VM
 ==================================
-
 :: 
 
   $ sudo x86_64-softmmu/qemu-system-x86_64 \
@@ -107,7 +105,6 @@ When starting a VM, /dev/vhost-vdpa-0 device should be assigned to the the VM as
 1.9 Delete VDPA device
 ======================
 Once user completed the use of VDPA device, it should be deleted by specifying the vdpa device name.
-
 ::
 
   $ vdpa dev del name vdpa0
