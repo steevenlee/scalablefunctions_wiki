@@ -185,7 +185,18 @@ View the devlink instance of the SF device:
   $ rdma dev show
   $ ls /sys/bus/auxiliary/devices/mlx5_core.sf.4/infiniband/
 
-3.12 Deactivate SF
+3.12 How to use SF devices (RDMA, netdev, vdpa)
+===============================================
+
+3.12.1 RDMA and netdevice of the SF
+====================================
+`RDMA, netdev usage guide <https://github.com/Mellanox/scalablefunctions/wiki/Upstream-how-to-use-SF-rdma%2C-netdevs>`_.
+
+3.12.2 VDPA device of the SF
+=============================
+`vdpa device usaage guide <https://github.com/Mellanox/scalablefunctions/wiki/Upstream-how-to-use-SF-rdma%2C-netdevs>`_.
+
+3.13 Deactivate SF
 ==================
 Once SF usage is complete, deactivate the SF. This will trigger driver unload in the host system.
 Once SF is deactivated, its operational state will change to be "detached".
@@ -196,7 +207,7 @@ This ensures a graceful hot unplug.
 
   $ devlink port function set pci/0000:06:00.0/32768 state inactive
 
-3.13 Delete SF
+3.14 Delete SF
 ==============
 Finally once the state is "inactive" and operational state is "detached", user can safely delete the SF.
 For faster provisioning, a user can reconfigure and active the SF again without deletion.
