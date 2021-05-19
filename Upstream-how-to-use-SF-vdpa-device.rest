@@ -43,8 +43,7 @@ View the management device of the SF device:
 
   $ vdpa mgmtdev show
   auxiliary/mlx5_core.sf.4
-    supported_classes:
-      net
+    supported_classes net
 
 1.4 Unload RDMA and netdevice of a SF
 ======================================
