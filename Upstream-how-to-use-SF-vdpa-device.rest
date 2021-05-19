@@ -18,7 +18,23 @@ Each SF's sfnum can be read using:
   $ cat /sys/bus/auxiliary/devices/mlx5_core.sf.4/sfnum
   88
 
-1.2  View the vdpa management device of the SF
+1.2 Load vdpa drivers
+======================
+Load vdpa stack drivers if they are not loaded to map a VDPA device to a VM.
+
+::
+
+    $ modprobe vdpa
+    $ modprobe vhost_vdpa
+
+Verify that vhost_vdpa driver is loaded.
+
+:: 
+
+    $ ls -l  /sys/bus/vdpa/drivers
+    drwxr-xr-x 2 root root 0 May  19 16:54 vhost_vdpa
+
+1.3  View the vdpa management device of the SF
 ==============================================
 VDPA devices are managed by its parent management device. 
 Each SF is management device. SF management device enables user to create corresponding vdpa device. 
@@ -33,11 +49,11 @@ View the management device of the SF device:
     supported_classes:
       net
 
-1.2 Unload RDMA and netdevice of a SF
+1.4 Unload RDMA and netdevice of a SF
 ======================================
 In order to efficiently use the VDPA device of a SF, user should disable RDMA and netdevice of the SF.
 
-1.3 Create the vdpa device that can be assigned via vhost
+1.5 Create the vdpa device that can be assigned via vhost
 ==========================================================
 VDPA device must be explicitly created by the user to use it.
 
@@ -52,11 +68,43 @@ At this point VDPA device is created and located on vdpa bus.
 
   $ ls /sys/bus/vdpa/devices/vdpa0
 
-1.4 Assign the vdpa device to a VM
-===================================
-TBD
+1.6 Bind vhost-vdpa driver to the VDPA device
+==============================================
+A VDPA device must be bound to vhost driver to assign a VDPA device to a VM.
+::
 
-1.5 Delete VDPA device
+   $ readlink /sys/bus/vdpa/devices/vdpa0/driver
+   ../../bus/vdpa/drivers/vhost_vdpa
+
+1.7 Find out vhost-vdpa device to assign to a VM
+=================================================
+When a VDPA device is attached to the vhost-vdpa driver, a vhost-vdpa character device is created.
+This can be found at:
+
+::
+    $ ls /sys/bus/vdpa/devices/vdpa0/vhost-*
+    vhost-vdpa-0
+
+This vhost-vdpa-0 device is located at /dev/vhost-vdpa-0.
+When starting a VM, /dev/vhost-vdpa-0 device should be assigned to the the VM as described below.
+
+1.8 Assign VHOST VDPA device to VM
+==================================
+
+:: 
+
+  $ sudo x86_64-softmmu/qemu-system-x86_64 \
+          -hda Fedora-Cloud-Base-32-1.6.x86_64.qcow2 \
+          -netdev type=vhost-vdpa,vhostdev=/dev/vhost-vdpa-0,id=vhost-vdpa1 \
+          -device virtio-net-pci,netdev=vhost-vdpa1,mac=00:e8:ca:33:ba:05,\
+          disable-modern=off,page-per-vq=on \
+          -enable-kvm \
+          -nographic \
+          -m 4G \
+          -cpu host \
+          2>&1 | tee vm.log
+
+1.9 Delete VDPA device
 ======================
 Once user completed the use of VDPA device, it should be deleted by specifying the vdpa device name.
 
