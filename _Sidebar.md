@@ -7,6 +7,8 @@
 ### Upstream software guide
 * [[Upstream kernel configuration]]
 * [[Upstream step by step guide]]
+* [[Upstream how to use SF rdma, netdev]]
+* [[Upstream how to use SF vdpa device]]
 * [[Upstream orchestration helper library]]
 
 ### MLNX_OFED software guide
