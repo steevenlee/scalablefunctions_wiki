@@ -21,10 +21,10 @@ Perform cold system reboot for configuration to take effect.
 
 2. Software control and commands
 ----------------------------------
-Scalable functions uses 4 step process from create to use as shown below.
-
-SF are managed using mlxdevm tool supplied with iproute2 package.
+Scalable functions are managed using mlxdevm tool supplied with iproute2 package.
 It is located at /opt/mellanox/sbin/iproute2/mlxdevm
+
+Scalable functions uses 4 step process from create to use as shown below.
 
 .. image:: pictures/create-config-deploy-use.png
    :scale: 60 %
