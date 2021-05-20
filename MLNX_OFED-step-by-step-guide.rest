@@ -164,3 +164,15 @@ For faster provisioning, a user can reconfigure and active the SF again without 
 ::
 
   $ mlxdevm port del pci/0000:06:00.0/32768
+
+2.12 Set affinity of sf (Optional)
+==================================
+SFs are sharing IRQs, so in order to set affinity of SFs, a new API is required.
+A typical example is split the CPUs between SFs, so that each SF will have dedicated CPUs.
+The default is an empty affinty mask.
+In case the SF is fully probe, devlink reload is required for the command to take affect.
+
+::
+
+  $ mlxdevm dev param set auxiliary/mlx5_core.sf.2 name cpu_affinity value 0-2,5 cmode driverinit
+  $ devlink dev reload auxiliary/mlx5_core.sf.2
