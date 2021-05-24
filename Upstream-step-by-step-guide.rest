@@ -73,9 +73,21 @@ SF after addition is still not usable for the end user application. It can be us
 ::
 
   $ devlink port add pci/0000:06:00.0 flavour pcisf pfnum 0 sfnum 88
-  pci/0000:06:00.0/32768: type eth netdev eth6 flavour pcisf controller 0 pfnum 0 sfnum 88 external false splittable false
+  pci/0000:06:00.0/32768: type eth netdev eth6 flavour pcisf controller 0 pfnum 0 sfnum 88 splittable false
     function:
       hw_addr 00:00:00:00:00:00 state inactive opstate detached
+
+When a SF is added for the external controller, such as on DPU/smartnic, user needs to supply the controller number.
+In a single host DPU case, there is only one controller starting with controller number = 1.
+
+Example of adding SF for the PF 0 of the external controller 1:
+::
+
+  $ devlink port add pci/0000:06:00.0 flavour pcisf pfnum 0 sfnum 88 controller 1
+  pci/0000:06:00.0/32768: type eth netdev eth6 flavour pcisf controller 1 pfnum 0 sfnum 88 splittable false
+    function:
+      hw_addr 00:00:00:00:00:00 state inactive opstate detached
+
 
 3.5 Show the newly added devlink port
 =====================================
@@ -89,7 +101,7 @@ Or
 ::
 
   $ devlink port show pci/0000:06:00.0/32768
-  pci/0000:06:00.0/32768: type eth netdev eth6 flavour pcisf controller 0 pfnum 0 sfnum 88 external false splittable false
+  pci/0000:06:00.0/32768: type eth netdev eth6 flavour pcisf controller 0 pfnum 0 sfnum 88 splittable false
     function:
       hw_addr 00:00:00:00:00:00 state inactive opstate detached
 
