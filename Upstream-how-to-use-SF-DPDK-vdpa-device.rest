@@ -22,9 +22,37 @@ Each SF's sfnum can be read using:
 ==============================================
 ::
 
-  $ ls /sys/bus/auxiliary/devices/mlx5_core.sf.5/infiniband/
+  $ ls /sys/bus/auxiliary/devices/mlx5_core.sf.4/infiniband/
   mlx5_4
 
-1.4  Use DPDK based vdpa device for the SF
-==========================================
+1.4 Build DPDK with vdpa example enabled.
+==============================================
+Add folowing parameter to meson command when configuring dpdk, then build:
+::
+
+  $ meson -Dexamples=vdpa -Dbuildtype=debug /tmp/build
+  $ ninja -C /tmp/build
+
+1.5 Use DPDK testpmd between forward SF representor port and PF
+================================================================
+DPDK testpmd starts as io fowarding mode by default if only two ports probled.
+::
+
+  $ /tmp/build/app/dpdk-testpmd --file-prefix=xx -w 0000:03:00.0,representor=sf88  -- --stats-period=1
+
 `DPDK step by step guide <https://doc.dpdk.org/guides/vdpadevs/mlx5.html>`_.
+
+1.6  Use DPDK based vdpa device for the SF
+============================================
+Start DPDK vdpa example with SF devices:
+::
+
+  $ /tmp/build/examples/dpdk-vdpa -w auxiliary:mlx5_core.sf.4,class=vdpa -- --iface /tmp/vhost-user-
+
+`DPDK mlx5 VDPA guide <https://doc.dpdk.org/guides/vdpadevs/mlx5.html>`_.
+
+1.7 Traffic test
+==================
+Start up qemu with vdpa interface, configure virtio interface ip and ping remote side, the traffice
+should be captured on wire.
+
